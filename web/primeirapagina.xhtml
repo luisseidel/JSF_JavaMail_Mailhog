@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+
+<h:body>
+    <h:form id="formPessoa">
+        <h:outputLabel value="Nome" for="nome" />
+        <h:inputText id="nome" value="#{usuarioController.name}" />
+        <h:outputLabel value="Senha" for="senha" />
+        <h:inputSecret id="senha" value="#{usuarioController.senha}" />
+        <h:outputLabel value="Texto" for="texto" />
+        <h:inputTextarea id="texto" value="#{usuarioController.texto}" cols="20" rows="10" a:maxlength="200"/>
+        <br/>
+        <h:commandButton value="Botão" action="#{usuarioController.addNome}" disabled="#{usuarioController.nomes.size() > 2}" />
+        <br/>
+
+        <h:commandButton value="Enviar Email" action="#{usuarioController.enviarEmail()}" />
+
+        <br/>
+        <hr />
+        <h:dataTable value="#{usuarioController.nomes}" var="name">
+            <h:column>
+                <h:outputText value="#{usuarioController.name}" />
+            </h:column>
+            <h:column>
+                <h:outputText value="#{usuarioController.senha}" />
+            </h:column>
+            <h:column>
+                <h:outputText value="#{usuarioController.texto}" />
+            </h:column>
+        </h:dataTable>
+    </h:form>
+</h:body>
+
+</html>
