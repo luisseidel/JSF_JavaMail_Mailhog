@@ -1,28 +1,15 @@
 package seidelsoft.controller;
 
-import com.itextpdf.text.Document;
-import com.itextpdf.text.DocumentException;
-import com.itextpdf.text.Paragraph;
-import com.itextpdf.text.pdf.PdfWriter;
-import jakarta.activation.DataHandler;
-import jakarta.mail.*;
-import jakarta.mail.internet.InternetAddress;
-import jakarta.mail.internet.MimeBodyPart;
-import jakarta.mail.internet.MimeMultipart;
-import jakarta.mail.util.ByteArrayDataSource;
 import lombok.Getter;
 import lombok.Setter;
+import org.apache.commons.lang3.StringUtils;
 import seidelsoft.dto.EmailLayout;
 import seidelsoft.model.Email;
 import seidelsoft.service.EmailService;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
-import javax.faces.bean.SessionScoped;
-import java.io.*;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.io.Serializable;
 
 @Getter
 @Setter
@@ -31,6 +18,14 @@ import java.util.List;
 public class EmailController implements Serializable {
 
     private EmailService emailService;
+
+    private String emailRemetente;
+    private String nomeRemetente;
+    private String cargoRemetente;
+    private String destinatario;
+    private String assunto;
+    private String mensagem;
+    private String textoRodape;
 
     public EmailController() {
         this.emailService = new EmailService();
@@ -41,20 +36,40 @@ public class EmailController implements Serializable {
     }
 
     public String enviarEmail() {
+        validarEmail();
         emailService.enviar(montarEmail());
 
         return null;
     }
 
+    private void validarEmail() {
+        if (StringUtils.isEmpty(emailRemetente)) {
+            return;
+        } else if (StringUtils.isEmpty(nomeRemetente)) {
+            return;
+        } else if (StringUtils.isEmpty(cargoRemetente)) {
+            return;
+        } else if (StringUtils.isEmpty(destinatario)) {
+            return;
+        } else if (StringUtils.isEmpty(assunto)) {
+            return;
+        } else if (StringUtils.isEmpty(mensagem)) {
+            return;
+        } else if (StringUtils.isEmpty(textoRodape)) {
+            return;
+        }
+    }
+
     private Email montarEmail() {
         EmailLayout layout = new EmailLayout();
         return layout.montarEmail(
-                "luis.seidel@celk.net",
-                "Teste de email",
-                "Esse é um texto genérico para o email de testes que estou enviando.",
-                "Luis Guilherme",
-                "Desenvolvedor",
-                "Email automático, favor não responder!"
+                destinatario,
+                assunto,
+                mensagem,
+                emailRemetente,
+                nomeRemetente,
+                cargoRemetente,
+                textoRodape
         );
     }
 }

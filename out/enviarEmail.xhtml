@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+>
+
+<h:body>
+    <h:form id="formEnviarEmail">
+
+        <h:outputLabel value="Email Remetente" for="emailRemetente"/>
+        <h:inputText id="emailRemetente" value="#{emailController.emailRemetente}" required="true" />
+
+        <h:outputLabel value="Nome Remetente" for="nomeRemetente"/>
+        <h:inputText id="nomeRemetente" value="#{emailController.nomeRemetente}" required="true" />
+
+        <h:outputLabel value="Cargo Remetente" for="cargoRemetente"/>
+        <h:inputText id="cargoRemetente" value="#{emailController.cargoRemetente}" required="true" />
+
+        <h:outputLabel value="Destinatários" for="destinatarios"/>
+        <h:inputText id="destinatarios" value="#{emailController.destinatario}" required="true" />
+
+        <h:outputLabel value="Assunto" for="assunto"/>
+        <h:inputText id="assunto" value="#{emailController.assunto}" required="true" />
+
+        <h:outputLabel value="Mensagem" for="mensagem" />
+        <h:inputTextarea id="mensagem" value="#{emailController.mensagem}" required="true"/>
+
+        <h:outputLabel value="Texto Rodapé" for="textoRodape"/>
+        <h:inputText id="textoRodape" value="#{emailController.textoRodape}" />
+
+        <h:commandButton value="Enviar Email" action="#{emailController.enviarEmail}" />
+    </h:form>
+</h:body>
+
+</html>

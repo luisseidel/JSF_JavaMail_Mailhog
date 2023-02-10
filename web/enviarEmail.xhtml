@@ -2,11 +2,64 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
-
+>
+<style type="text/css">
+    form {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+    }
+    div {
+        margin: 10px 0;
+        display: flex;
+        justify-content: left;
+        align-items: center;
+    }
+    div label {
+        min-width: 130px;
+    }
+</style>
 <h:body>
     <h:form id="formEnviarEmail">
-        <h:commandButton value="Enviar Email" action="#{emailController.enviarEmail}" />
+
+        <div>
+            <h:outputLabel value="Email Remetente" for="emailRemetente"/>
+            <h:inputText id="emailRemetente" value="#{emailController.emailRemetente}" required="true" />
+        </div>
+
+        <div>
+            <h:outputLabel value="Nome Remetente" for="nomeRemetente"/>
+            <h:inputText id="nomeRemetente" value="#{emailController.nomeRemetente}" required="true" />
+        </div>
+
+        <div>
+            <h:outputLabel value="Cargo Remetente" for="cargoRemetente"/>
+            <h:inputText id="cargoRemetente" value="#{emailController.cargoRemetente}" required="true" />
+        </div>
+
+        <div>
+            <h:outputLabel value="Destinatários" for="destinatarios"/>
+            <h:inputText id="destinatarios" value="#{emailController.destinatario}" required="true" />
+        </div>
+
+        <div>
+            <h:outputLabel value="Assunto" for="assunto"/>
+            <h:inputText id="assunto" value="#{emailController.assunto}" required="true" />
+        </div>
+
+        <div>
+            <h:outputLabel value="Mensagem" for="mensagem" />
+            <h:inputTextarea id="mensagem" value="#{emailController.mensagem}" required="true"/>
+        </div>
+
+        <div>
+            <h:outputLabel value="Texto Rodapé" for="textoRodape"/>
+            <h:inputText id="textoRodape" value="#{emailController.textoRodape}" />
+        </div>
+
+        <div>
+            <h:commandButton value="Enviar Email" action="#{emailController.enviarEmail}" />
+        </div>
     </h:form>
 </h:body>
 

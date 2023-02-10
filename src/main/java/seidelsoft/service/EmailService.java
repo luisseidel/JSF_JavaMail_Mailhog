@@ -1,6 +1,5 @@
 package seidelsoft.service;
 
-import com.itextpdf.text.DocumentException;
 import jakarta.mail.*;
 import jakarta.mail.internet.InternetAddress;
 import jakarta.mail.internet.MimeBodyPart;
@@ -9,7 +8,6 @@ import jakarta.mail.internet.MimeMultipart;
 import lombok.Getter;
 import lombok.Setter;
 import seidelsoft.model.Email;
-import seidelsoft.util.EmailUtils;
 
 import javax.faces.bean.NoneScoped;
 import java.io.IOException;
@@ -60,7 +58,7 @@ public class EmailService extends Thread {
         for (Email email : listEmails) {
             try {
                 Message message = new MimeMessage(s);
-                message.setFrom(new InternetAddress("luis.seidel@celk.net", "Luis Seidel"));
+                message.setFrom(new InternetAddress(email.getEmailRemetente(), email.getNomeRemetente()));
 
                 if (email.getDestinatarios().contains("/")) {
                     List<InternetAddress> listDestinatarios = new ArrayList<>();
@@ -82,7 +80,7 @@ public class EmailService extends Thread {
                 Multipart multipart = new MimeMultipart();
                 multipart.addBodyPart(textPart);
 
-                EmailUtils.addAnexosEmail(email, multipart);
+                //EmailUtils.addAnexosEmail(email, multipart);
 
                 message.setContent(multipart);
 
@@ -90,9 +88,6 @@ public class EmailService extends Thread {
 
             } catch (MessagingException ex) {
                 ex.printStackTrace();
-                //LogUtil.getLogger(EmailService.class).log(System.Logger.Level.ERROR, e.getMessage());
-            } catch (DocumentException e) {
-                throw new RuntimeException(e);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }

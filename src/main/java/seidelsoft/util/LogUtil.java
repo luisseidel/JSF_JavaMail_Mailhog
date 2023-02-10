@@ -1,6 +1,5 @@
 package seidelsoft.util;
 
-import java.util.Objects;
 import java.util.logging.Logger;
 
 public class LogUtil {

@@ -22,7 +22,6 @@ public class EmailConfigs {
 
     public Message getMimeMessage() {
         Properties props = this.getProperties();
-
         Authenticator auth = new Authenticator() {
             @Override
             protected PasswordAuthentication getPasswordAuthentication() {
@@ -40,26 +39,27 @@ public class EmailConfigs {
     }
 
     public Properties getProperties() {
-        try {
-            InputStream input = new FileInputStream("src/main/resources/email.properties");
-            System.out.println("input is null: " + (input == null));
-            properties = new Properties();
-            properties.load(input);
-
-            return properties;
-
-        } catch (FileNotFoundException fx) {
-            System.out.println("Não encontrei o arquivo!");
-            fx.printStackTrace();
-        } catch (IOException ex) {
-            ex.printStackTrace();
+        if (properties == null) {
+            try {
+                InputStream input = new FileInputStream("src/main/resources/email.properties");
+                properties = new Properties();
+                properties.load(input);
+            } catch (FileNotFoundException fx) {
+                System.out.println("Não encontrei o arquivo!");
+                fx.printStackTrace();
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
         }
 
-        return null;
+        return properties;
     }
 
     public String getHost() {
         return getProperties().getProperty("mail.smtp.host");
+    }
+    public String smtpPort() {
+        return getProperties().getProperty("mail.smtp.port");
     }
     public String getUser() {
         return getProperties().getProperty("email.user");
@@ -67,19 +67,8 @@ public class EmailConfigs {
     public String getSenha() {
         return getProperties().getProperty("email.senha");
     }
-    public String smtpAuth() {
-        return getProperties().getProperty("mail.smtp.auth");
-    }
     public String smtpStartTls() {
         return getProperties().getProperty("mail.smtp.starttls.enable");
     }
-    public String smtpPort() {
-        return getProperties().getProperty("mail.smtp.port");
-    }
-    public String smtpSocketFactoryPort() {
-        return getProperties().getProperty("mail.smtp.socketFactory.port");
-    }
-    public String smtpSocketFactoryClass() {
-        return getProperties().getProperty("mail.smtp.socketFactory.class");
-    }
+
 }

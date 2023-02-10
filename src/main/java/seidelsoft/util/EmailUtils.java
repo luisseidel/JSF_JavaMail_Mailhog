@@ -4,11 +4,8 @@ import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfWriter;
-import jakarta.activation.DataHandler;
 import jakarta.mail.MessagingException;
 import jakarta.mail.Multipart;
-import jakarta.mail.internet.MimeBodyPart;
-import jakarta.mail.util.ByteArrayDataSource;
 import seidelsoft.model.Email;
 
 import java.io.File;
@@ -22,15 +19,15 @@ public class EmailUtils {
 
     public static void addAnexosEmail(Email email, Multipart multipart) throws IOException, MessagingException, DocumentException {
         int index = 0;
-        email.setListAnexos(getListPdfExemplo());
-
-        for (FileInputStream fis : email.getListAnexos()) {
-            MimeBodyPart anexoEmail = new MimeBodyPart();
-            anexoEmail.setDataHandler(new DataHandler(new ByteArrayDataSource(fis, "application/pdf")));
-            anexoEmail.setFileName("anexo"+index+".pdf");
-            multipart.addBodyPart(anexoEmail);
-            index++;
-        }
+//        email.setListAnexos(getListPdfExemplo());
+//
+//        for (FileInputStream fis : email.getListAnexos()) {
+//            MimeBodyPart anexoEmail = new MimeBodyPart();
+//            anexoEmail.setDataHandler(new DataHandler(new ByteArrayDataSource(fis, "application/pdf")));
+//            anexoEmail.setFileName("anexo"+index+".pdf");
+//            multipart.addBodyPart(anexoEmail);
+//            index++;
+//        }
     }
 
     public static FileInputStream getPdfExemplo() throws IOException, DocumentException {

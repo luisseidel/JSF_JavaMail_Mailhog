@@ -1,41 +1,47 @@
 package seidelsoft.model;
 
-import com.itextpdf.text.Document;
-import com.itextpdf.text.DocumentException;
-import com.itextpdf.text.Paragraph;
-import com.itextpdf.text.pdf.PdfWriter;
-import jakarta.activation.DataHandler;
-import jakarta.mail.*;
-import jakarta.mail.internet.InternetAddress;
-import jakarta.mail.internet.MimeBodyPart;
-import jakarta.mail.internet.MimeMultipart;
-import jakarta.mail.util.ByteArrayDataSource;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-import seidelsoft.util.EmailConfigs;
 
-import java.io.*;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.Calendar;
 
 @Getter
 @Setter
+@Entity
+@Table(name = "emails")
 public class Email {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+    @Column(name = "mensagem")
     private String mensagem;
+    @Column(name = "assunto")
     private String assunto;
+    @Column(name = "email_remetente")
+    private String emailRemetente;
     private String nomeRemetente;
+    @Column(name = "destinatarios")
     private String destinatarios;
-    private List<FileInputStream> listAnexos;
+
+    @Column(name = "data_envio")
+    @Temporal(TemporalType.TIME)
+    private Calendar dataEnvio;
+
 
     public Email() {}
 
-    public Email(String destinatarios, String assunto, String mensagem) {
-        this.destinatarios = destinatarios;
-        this.assunto = assunto;
-        this.mensagem = mensagem;
-        this.listAnexos = new ArrayList<>();
+    public Email(Long id) {
+        this.id = id;
     }
 
+    public Email(String mensagem, String assunto, String emailRemetente, String nomeRemetente, String destinatarios, Calendar dataEnvio) {
+        this.mensagem = mensagem;
+        this.assunto = assunto;
+        this.emailRemetente = emailRemetente;
+        this.nomeRemetente = nomeRemetente;
+        this.destinatarios = destinatarios;
+        this.dataEnvio = dataEnvio;
+    }
 }

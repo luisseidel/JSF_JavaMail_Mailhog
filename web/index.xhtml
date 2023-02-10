@@ -4,23 +4,11 @@
       xmlns:h="http://java.sun.com/jsf/html">
 
 <h:head>
-    <script>
-       function teste() {
-           var campo = document.getElementById("formNavegar:clickjs");
-           campo.value = 'teste';
-       }
-    </script>
 </h:head>
 
 <h:body>
     <h:form id="formNavegar" >
         <h1>Olá</h1>
-        <h:commandButton value="Navegar" action="primeirapagina" />
-        <br/>
-        <br/>
-        <h:inputText id="clickjs" onkeypress="this.value = this.value.toUpperCase();"/>
-        <br/>
-        <h:commandButton value="Click JS" onclick="teste()" />
         <br/>
         <br/>
         <h:commandButton value="Enviar Email" action="enviarEmail" />

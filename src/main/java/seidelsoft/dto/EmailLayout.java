@@ -1,22 +1,8 @@
 package seidelsoft.dto;
 
-import com.itextpdf.text.Document;
-import com.itextpdf.text.DocumentException;
-import com.itextpdf.text.Paragraph;
-import com.itextpdf.text.pdf.PdfWriter;
-import jakarta.activation.DataHandler;
-import jakarta.mail.MessagingException;
-import jakarta.mail.Multipart;
-import jakarta.mail.internet.MimeBodyPart;
-import jakarta.mail.util.ByteArrayDataSource;
 import seidelsoft.model.Email;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Calendar;
 
 public class EmailLayout {
 
@@ -24,13 +10,19 @@ public class EmailLayout {
     private static final String BARRA_HORIZONTAL = "<hr/>";
     private static final String QUEBRA_LINHA_DUPLA = "<br><br>";
 
-    public Email montarEmail(String destinatario, String assunto, String texto, String nomeAssinatura, String cargo, String textoRodape) {
+    public Email montarEmail(String destinatario,
+                             String assunto,
+                             String mensagem,
+                             String emailRemetente,
+                             String nomeRemetente,
+                             String cargoRemetente,
+                             String textoRodape) {
         StringBuilder corpo = new StringBuilder();
-        corpo.append(texto);
-        gerarAssinatura(corpo, nomeAssinatura, cargo);
+        corpo.append(mensagem);
+        gerarAssinatura(corpo, nomeRemetente, cargoRemetente);
         gerarRodape(corpo, textoRodape);
 
-        return new Email(destinatario, assunto,corpo.toString());
+        return new Email(corpo.toString(), assunto, emailRemetente, nomeRemetente, destinatario, Calendar.getInstance());
     }
 
     private void criarBarraHorizontal(StringBuilder texto) {
