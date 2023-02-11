@@ -38,11 +38,20 @@ public class EmailController implements Serializable {
     public String enviarEmail() {
         validarEmail();
         emailService.enviar(montarEmail());
-
+        limparCampos();
         return null;
     }
 
     private void validarEmail() {
+
+        /*TODO
+        *  1. Criar minhas exções personalizadas
+        *  2. Lançar exeções na tela
+        *  3. Realizar validações
+        *  4. Limpar campos
+        *
+        **/
+
         if (StringUtils.isEmpty(emailRemetente)) {
             return;
         } else if (StringUtils.isEmpty(nomeRemetente)) {
@@ -58,6 +67,10 @@ public class EmailController implements Serializable {
         } else if (StringUtils.isEmpty(textoRodape)) {
             return;
         }
+    }
+
+    private void limparCampos() {
+
     }
 
     private Email montarEmail() {
