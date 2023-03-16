@@ -10,19 +10,16 @@ public class EmailLayout {
     private static final String BARRA_HORIZONTAL = "<hr/>";
     private static final String QUEBRA_LINHA_DUPLA = "<br><br>";
 
-    public Email montarEmail(String destinatario,
-                             String assunto,
-                             String mensagem,
-                             String emailRemetente,
-                             String nomeRemetente,
-                             String cargoRemetente,
-                             String textoRodape) {
+    public Email montarEmail(
+        String mensagem,
+        String assunto,
+        String emailRemetente,
+        String destinatario
+    ) {
         StringBuilder corpo = new StringBuilder();
         corpo.append(mensagem);
-        gerarAssinatura(corpo, nomeRemetente, cargoRemetente);
-        gerarRodape(corpo, textoRodape);
 
-        return new Email(corpo.toString(), assunto, emailRemetente, nomeRemetente, destinatario, Calendar.getInstance());
+        return new Email(corpo.toString(), assunto, emailRemetente, destinatario, Calendar.getInstance());
     }
 
     private void criarBarraHorizontal(StringBuilder texto) {

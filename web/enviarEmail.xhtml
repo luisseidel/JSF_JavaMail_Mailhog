@@ -2,6 +2,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
 >
 <style type="text/css">
     form {
@@ -18,23 +19,16 @@
     div label {
         min-width: 130px;
     }
+
+    .form-error {color:red}
 </style>
 <h:body>
     <h:form id="formEnviarEmail">
+        <h:messages styleClass="form-error"/>
 
         <div>
             <h:outputLabel value="Email Remetente" for="emailRemetente"/>
             <h:inputText id="emailRemetente" value="#{emailController.emailRemetente}" required="true" />
-        </div>
-
-        <div>
-            <h:outputLabel value="Nome Remetente" for="nomeRemetente"/>
-            <h:inputText id="nomeRemetente" value="#{emailController.nomeRemetente}" required="true" />
-        </div>
-
-        <div>
-            <h:outputLabel value="Cargo Remetente" for="cargoRemetente"/>
-            <h:inputText id="cargoRemetente" value="#{emailController.cargoRemetente}" required="true" />
         </div>
 
         <div>
@@ -53,13 +47,27 @@
         </div>
 
         <div>
-            <h:outputLabel value="Texto Rodapé" for="textoRodape"/>
-            <h:inputText id="textoRodape" value="#{emailController.textoRodape}" />
-        </div>
-
-        <div>
             <h:commandButton value="Enviar Email" action="#{emailController.enviarEmail}" />
         </div>
+
+        <h:dataTable value="#{emailController.listEmails}" var="email" styleClass="" headerClass="">
+            <h:column>
+                <f:facet name="header">ID</f:facet>
+                #{email.id}
+            </h:column>
+            <h:column>
+                <f:facet name="header">Remetente</f:facet>
+                #{email.emailRemetente}
+            </h:column>
+            <h:column>
+                <f:facet name="header">Destinatário</f:facet>
+                #{email.destinatarios}
+            </h:column>
+            <h:column>
+                <f:facet name="header">Mensagem</f:facet>
+                #{email.mensagem}
+            </h:column>
+        </h:dataTable>
     </h:form>
 </h:body>
 

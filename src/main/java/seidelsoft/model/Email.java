@@ -36,11 +36,10 @@ public class Email {
         this.id = id;
     }
 
-    public Email(String mensagem, String assunto, String emailRemetente, String nomeRemetente, String destinatarios, Calendar dataEnvio) {
+    public Email(String mensagem, String assunto, String emailRemetente, String destinatarios, Calendar dataEnvio) {
         this.mensagem = mensagem;
         this.assunto = assunto;
         this.emailRemetente = emailRemetente;
-        this.nomeRemetente = nomeRemetente;
         this.destinatarios = destinatarios;
         this.dataEnvio = dataEnvio;
     }
